@@ -1,0 +1,49 @@
+.home {
+  text-align: center;
+}
+
+.home header {
+  background-color: rgba(20, 20, 20, 0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  color: #fff;
+}
+
+.home header img {
+  border-radius: 50%;
+}
+
+.home header h2 {
+  font-size: 1.3rem;
+}
+.home header button {
+  background-color: white;
+  color: rgba(20, 20, 20, 0.9);
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+.home section {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.home section img {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  margin: 1rem;
+}
+.home > button {
+  background-color: rgba(20, 20, 20, 0.9);
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin: 10px 0 10px 0;
+}

@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { useAuth0 } from "@auth0/auth0-react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+
+import Login from "./components/login/login.component";
+import Home from "./components/home/home.component";
+import Loader from "./components/utils/loader.component";
 
 function App() {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  console.log(user);
+
+  const PublicRoute = ({ exact, path, children }) =>
+    isLoading ? (
+      <Loader />
+    ) : isAuthenticated ? (
+      <Redirect to="/" />
+    ) : (
+      <Route exact={exact ? true : false} path={path} children={children} />
+    );
+
+  const PrivateRoute = ({ exact, path, children }) =>
+    isLoading ? (
+      <Loader />
+    ) : !user ? (
+      <Redirect to="/login" />
+    ) : (
+      <Route exact={exact ? true : false} path={path} children={children} />
+    );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <PrivateRoute exact path="/" children={<Home />} />
+        <PublicRoute path="/login" children={<Login />} />
+      </Switch>
+    </Router>
   );
 }
 
